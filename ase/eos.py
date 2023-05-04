@@ -192,7 +192,7 @@ class EquationOfState:
         Notice that the ASE units for the bulk modulus is
         eV/Angstrom^3 - to get the value in GPa, do this::
 
-          v0, e0, B = eos.fit()
+          v0, e0, B, BP = eos.fit()
           print(B / kJ * 1.0e24, 'GPa')
 
         """
