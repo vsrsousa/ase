@@ -187,8 +187,9 @@ class EquationOfState:
     def fit(self, warn=True):
         """Calculate volume, energy, and bulk modulus.
 
-        Returns the optimal volume, the minimum energy, and the bulk
-        modulus.  Notice that the ASE units for the bulk modulus is
+        Returns the optimal volume, the minimum energy, the bulk
+        modulus and the derivative of the bulk modulus.
+        Notice that the ASE units for the bulk modulus is
         eV/Angstrom^3 - to get the value in GPa, do this::
 
           v0, e0, B = eos.fit()
@@ -253,13 +254,14 @@ class EquationOfState:
             self.v0 = self.eos_parameters[3]
             self.e0 = self.eos_parameters[0]
             self.B = self.eos_parameters[1]
+            self.BP = self.eos_parameters[2]
 
         if warn and not (minvol < self.v0 < maxvol):
             warnings.warn(
                 'The minimum volume of your fit is not in '
                 'your volumes.  You may not have a minimum in your dataset!')
 
-        return self.v0, self.e0, self.B
+        return self.v0, self.e0, self.B, self.BP
 
     def getplotdata(self):
         if self.v0 is None:
